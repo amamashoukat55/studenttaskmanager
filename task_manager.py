@@ -8,6 +8,10 @@ class TaskManager:
             print("Error: Task title cannot be empty.")
             return False
 
+        if len(title.strip()) > 100:
+            print("Error: Task title must be 100 characters or fewer.")
+            return False
+
         task = {
             "id": self.next_id,
             "title": title.strip(),
@@ -55,3 +59,7 @@ def main():
 
         else:
             print("Invalid choice. Try again.")
+
+
+if __name__ == "__main__":
+    main()
