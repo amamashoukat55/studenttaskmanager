@@ -1,19 +1,27 @@
-
 class TaskManager:
     def __init__(self):
         self.tasks = []
         self.next_id = 1
 
     def add_task(self, title):
+        if not title.strip():
+            print("Error: Task title cannot be empty.")
+            return False
+
+        if len(title.strip()) > 100:
+            print("Error: Task title must be 100 characters or fewer.")
+            return False
+
         task = {
             "id": self.next_id,
-            "title": title,
+            "title": title.strip(),
             "completed": False
         }
 
         self.tasks.append(task)
         self.next_id += 1
         print("Task added successfully!")
+        return True
 
     def display_tasks(self):
         if not self.tasks:
