@@ -1,3 +1,4 @@
+
 class TaskManager:
     def __init__(self):
         self.tasks = []
@@ -28,6 +29,11 @@ class TaskManager:
     def complete_task(self, task_id):
         for task in self.tasks:
             if task["id"] == task_id:
+
+                if task["completed"]:
+                    print("Task is already completed.")
+                    return False
+
                 task["completed"] = True
                 print("Task marked as completed!")
                 return True
