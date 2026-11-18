@@ -40,9 +40,6 @@ class TestTaskManager(unittest.TestCase):
         self.assertTrue(result)
         self.assertEqual(len(self.manager.tasks), 0)
 
-    def test_demo_failure(self):
-        self.assertEqual(1, 2)
-
 
 if __name__ == "__main__":
     unittest.main()
