@@ -5,15 +5,20 @@ class TaskManager:
         self.next_id = 1
 
     def add_task(self, title):
+        if not title.strip():
+            print("Error: Task title cannot be empty.")
+            return False
+
         task = {
             "id": self.next_id,
-            "title": title,
+            "title": title.strip(),
             "completed": False
         }
 
         self.tasks.append(task)
         self.next_id += 1
         print("Task added successfully!")
+        return True
 
     def display_tasks(self):
         if not self.tasks:
@@ -26,7 +31,25 @@ class TaskManager:
             status = "Completed" if task["completed"] else "Pending"
             print(f'{task["id"]}. {task["title"]} - {status}')
 
+    def complete_task(self, task_id):
+        for task in self.tasks:
+            if task["id"] == task_id:
+                if task["completed"]:
+                    print("Task is already completed.")
+                    return False
+
+                task["completed"] = True
+                print("Task marked as completed!")
+                return True
+
+        print("Task ID not found.")
+        return False
+
     def delete_task(self, task_id):
+        if task_id <= 0:
+            print("Please enter a valid positive task ID.")
+            return False
+
         for task in self.tasks:
             if task["id"] == task_id:
                 self.tasks.remove(task)
@@ -44,8 +67,9 @@ def main():
         print("\n===== Student Task Manager =====")
         print("1. Add Task")
         print("2. Display Tasks")
-        print("3. Delete Task")
-        print("4. Exit")
+        print("3. Complete Task")
+        print("4. Delete Task")
+        print("5. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -58,14 +82,21 @@ def main():
 
         elif choice == "3":
             manager.display_tasks()
+            try:
+                task_id = int(input("Enter task ID to complete: "))
+                manager.complete_task(task_id)
+            except ValueError:
+                print("Please enter a valid numeric task ID.")
 
+        elif choice == "4":
+            manager.display_tasks()
             try:
                 task_id = int(input("Enter task ID to delete: "))
                 manager.delete_task(task_id)
             except ValueError:
                 print("Please enter a valid numeric task ID.")
 
-        elif choice == "4":
+        elif choice == "5":
             print("Goodbye!")
             break
 
