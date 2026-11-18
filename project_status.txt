@@ -1,1 +1,2 @@
-Project status: In Progress
+Project status: Approved
+Previous status: In Progress
